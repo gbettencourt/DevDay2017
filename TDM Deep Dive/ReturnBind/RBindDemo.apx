@@ -1,0 +1,419 @@
+<application xmlns="urn:Gupta.TD.CDK" version="2.0">
+  <settings>
+    <setting DefaultLanguage="en-US" />
+    <setting BuildTargetPath="&lt;default&gt;" />
+    <setting BuildURL="http://localhost" />
+    <setting DefaultDisplay="Tablet" />
+    <setting FallbackDisplay="Tablet" />
+    <setting FallbackLanguage="en-US" />
+    <setting PublishIISUrl="localhost" />
+    <setting Roles="Administrator,User" />
+    <setting DefaultPage="DemoPage" />
+  </settings>
+  <libraries />
+  <displays>
+    <display name="Phone" width="320" height="480" id="phone" isphone="True" />
+    <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
+  </displays>
+  <cssincludes />
+  <jsincludes />
+  <javascripts />
+  <miscincludes />
+  <weblinks />
+  <reportfiles />
+  <symbolimports />
+  <variables />
+  <functions />
+  <operations />
+  <exceptions />
+  <classes>
+    <class name="Company" isdata="true" namemap="COMPANY">
+      <inherits />
+      <instance_variables>
+        <variable name="ADDRESS" type="String" />
+        <variable name="CITY" type="String" />
+        <variable name="COMPANY_ID" type="Number" identityfield="true" />
+        <variable name="COMPANY_NAME" type="String" />
+        <variable name="CORPORATE_URL" type="String" />
+        <variable name="COUNTRY" type="String" />
+        <variable name="FAX" type="String" />
+        <variable name="LINE" type="Number" />
+        <variable name="PHONE" type="String" />
+        <variable name="STATE" type="String" />
+        <variable name="TERMS" type="String" />
+        <variable name="ZIP" type="String" />
+      </instance_variables>
+      <functions />
+      <constructors />
+    </class>
+  </classes>
+  <dataconnections>
+    <dataconnection name="IslandDB" connectiontype="SQL">
+      <description />
+      <configuration>
+        <config name="DatabaseName">application1</config>
+        <config name="Port">27017</config>
+        <config name="Host">localhost</config>
+        <config name="DbProvider">Sqlbase</config>
+        <config name="DbConnectionString">DataSource=localhost;InitialCatalog=ISLAND;Server=Server1;User=SYSADM;Password=SYSADM;poolsize=10;connectionlifetime=20;</config>
+      </configuration>
+    </dataconnection>
+  </dataconnections>
+  <webpages>
+    <page name="DemoPage">
+      <supporteddisplays>
+        <display id="tablet" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="tablet">
+          <property type="Children" value="lg1" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="tablet" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="tablet">
+              <property type="Title">
+                <value culture="en-US" title="Multi Target Bind" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="table1" type="ChildGrid">
+          <properties>
+            <propertylist display="tablet">
+              <property type="TopMargin" value="0" />
+              <property type="Children" value="bgt1,df1" />
+              <property type="ListBinding" value="COMPANIES1" />
+              <property type="ParentControl" value="lg1" />
+            </propertylist>
+          </properties>
+          <events />
+          <columns>
+            <column name="table1_col1">
+              <properties>
+                <propertylist display="phone" />
+                <propertylist display="tablet">
+                  <property type="Title">
+                    <value culture="en-US" title="First Comp ID" />
+                  </property>
+                </propertylist>
+              </properties>
+            </column>
+            <column name="table1_col2">
+              <properties>
+                <propertylist display="phone" />
+                <propertylist display="tablet" />
+              </properties>
+            </column>
+          </columns>
+        </control>
+        <control name="bgt1" type="Label">
+          <properties>
+            <propertylist display="tablet">
+              <property type="ParentControl" value="table1" />
+              <property type="TopMargin" value="0" />
+              <property type="Binding" value="COMPANIES1.COMPANY_ID" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pbLoadFirstTable" type="Button">
+          <properties>
+            <propertylist display="tablet">
+              <property type="Title">
+                <value culture="en-US" title="Load First Table" />
+              </property>
+              <property type="TopMargin" value="0" />
+              <property type="ParentControl" value="lg1" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Invoke" data="GetCompanies" extradata="" />
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="pbLoadSecondTable" type="Button">
+          <properties>
+            <propertylist display="tablet">
+              <property type="Title">
+                <value culture="en-US" title="Load Second Table" />
+              </property>
+              <property type="TopMargin" value="0" />
+              <property type="Column" value="1" />
+              <property type="ParentControl" value="lg1" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Javascript" data="InvokeGetCompanies" extradata="&quot;COMPANIES2&quot;" />
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="table2" type="ChildGrid">
+          <properties>
+            <propertylist display="tablet">
+              <property type="ListBinding" value="COMPANIES2" />
+              <property type="Children" value="bgt2,df2" />
+              <property type="TopMargin" value="0" />
+              <property type="Column" value="1" />
+              <property type="ParentControl" value="lg1" />
+            </propertylist>
+          </properties>
+          <events />
+          <columns>
+            <column name="table2_col1">
+              <properties>
+                <propertylist display="tablet">
+                  <property type="Title">
+                    <value culture="en-US" title="Second Comp Name" />
+                  </property>
+                </propertylist>
+                <propertylist display="phone" />
+              </properties>
+            </column>
+            <column name="table2_col2">
+              <properties>
+                <propertylist display="tablet" />
+                <propertylist display="phone" />
+              </properties>
+            </column>
+          </columns>
+        </control>
+        <control name="lg1" type="LayoutGrid">
+          <properties>
+            <propertylist display="tablet">
+              <property type="Children" value="pbLoadFirstTable,table1,pbLoadSecondTable,table2" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df1" type="TextBox">
+          <properties>
+            <propertylist display="tablet">
+              <property type="ParentControl" value="table1" />
+              <property type="TopMargin" value="0" />
+              <property type="Column" value="1" />
+              <property type="Binding" value="COMPANIES1.COMPANY_NAME" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df2" type="TextBox">
+          <properties>
+            <propertylist display="tablet">
+              <property type="ParentControl" value="table2" />
+              <property type="TopMargin" value="0" />
+              <property type="Column" value="1" />
+              <property type="Binding" value="COMPANIES2.COMPANY_NAME" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="bgt2" type="Label">
+          <properties>
+            <propertylist display="tablet">
+              <property type="ParentControl" value="table2" />
+              <property type="TopMargin" value="0" />
+              <property type="Binding" value="COMPANIES2.COMPANY_ID" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+      </contents>
+      <bindings>
+        <binding name="COMPANIES2" array="true" type="Company">
+          <state mode="HasItems" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ADDRESS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CITY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_NAME" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CORPORATE_URL" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COUNTRY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="FAX" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="LINE" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="PHONE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="STATE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="TERMS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="ZIP" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+        <binding name="COMPANIES1" array="true" type="Company">
+          <state mode="HasItems" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ADDRESS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CITY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_NAME" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CORPORATE_URL" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COUNTRY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="FAX" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="LINE" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="PHONE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="STATE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="TERMS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="ZIP" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts>
+        <function name="InvokeGetCompanies">
+          <description />
+          <parameters>
+            <variable name="returnBind" type="Unknown" />
+          </parameters>
+          <variables />
+          <javascript>var opName = "GetComp" + returnBind;
+    var getCompOp = Td.Data.Operation.get("GetCompanies");
+    var op = Td.Data.Operation.get(opName);
+    if (op == null) {
+        //clone existing operation
+        op = new Td.Data.Operation(
+                opName, 
+                getCompOp.endpoint, 
+                returnBind,             //new return bind
+                getCompOp.paramBinds);
+    }
+    op.invoke();</javascript>
+        </function>
+      </javascripts>
+      <parameters />
+      <events />
+      <functions />
+      <operations>
+        <dataoperation name="GetCompanies" connection="IslandDB" dataaction="Browse">
+          <databinding>
+            <binding name="COMPANIES1" />
+          </databinding>
+          <idbinds />
+          <filters />
+          <sortoptions />
+          <limitbinding>
+            <binding name="" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="" />
+          </skipbinding>
+        </dataoperation>
+      </operations>
+      <reports />
+    </page>
+  </webpages>
+  <dialogs />
+  <webconfig />
+</application>

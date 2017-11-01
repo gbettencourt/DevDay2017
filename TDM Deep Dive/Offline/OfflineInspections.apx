@@ -1,0 +1,523 @@
+<application xmlns="urn:Gupta.TD.CDK" version="2.0">
+  <settings>
+    <setting DefaultLanguage="en-US" />
+    <setting BuildTargetPath="&lt;default&gt;" />
+    <setting BuildURL="http://localhost" />
+    <setting DefaultDisplay="Phone" />
+    <setting FallbackDisplay="Phone" />
+    <setting FallbackLanguage="en-US" />
+    <setting PublishIISUrl="localhost" />
+    <setting Roles="Administrator,User" />
+    <setting DefaultPage="Home" />
+    <setting EnableOffline="True" />
+    <setting CordovaEnabled="False" />
+    <setting CordovaTargetDisplay="Phone" />
+  </settings>
+  <libraries />
+  <displays>
+    <display name="Phone" width="320" height="480" id="phone" isphone="True" />
+    <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
+  </displays>
+  <cssincludes />
+  <jsincludes>
+    <jsfile name="offline.util.js" path=".">
+      <description />
+    </jsfile>
+  </jsincludes>
+  <javascripts />
+  <miscincludes />
+  <weblinks />
+  <reportfiles />
+  <symbolimports />
+  <variables />
+  <functions />
+  <operations />
+  <exceptions />
+  <classes>
+    <class name="Inspection" isdata="true">
+      <inherits />
+      <instance_variables>
+        <variable name="ID" type="Number" identityfield="true" autoincrement="true" />
+        <variable name="StoreName" type="String" />
+        <variable name="Notes" type="String" />
+        <variable name="Passed" type="Boolean" />
+        <variable name="CachedInspection" type="Boolean" />
+        <variable name="InspectionTime" type="Date/Time" />
+      </instance_variables>
+      <functions />
+      <constructors />
+    </class>
+  </classes>
+  <dataconnections>
+    <dataconnection name="MongoDB" connectiontype="Mongo">
+      <description />
+      <configuration>
+        <config name="DatabaseName">Inspections</config>
+        <config name="Port">27017</config>
+        <config name="Host">localhost</config>
+      </configuration>
+    </dataconnection>
+  </dataconnections>
+  <webpages>
+    <page name="Home">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="pb2,bgt3,ltv1" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Inspection" />
+              </property>
+              <property type="Children" value="pb1" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pb1" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="ParentControl" value="__header" />
+              <property type="Column" value="2" />
+              <property type="TopMargin" value="0" />
+              <property type="Title">
+                <value culture="en-US" title="New" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Navigate" data="NewInspection" extradata="" />
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="ltv1" type="ListView">
+          <properties>
+            <propertylist display="phone">
+              <property type="Children" value="lg1" />
+              <property type="ListBinding" value="INSPECTIONS" />
+              <property type="ParentControl" value="Home" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="lg1" type="LayoutGrid">
+          <properties>
+            <propertylist display="phone">
+              <property type="ParentControl" value="Home" />
+              <property type="TopMargin" value="0" />
+              <property type="Children" value="bgt1,bgt2" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="bgt1" type="Label">
+          <properties>
+            <propertylist display="phone">
+              <property type="ParentControl" value="Home" />
+              <property type="TopMargin" value="0" />
+              <property type="Binding" value="INSPECTIONS.StoreName" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="bgt2" type="Label">
+          <properties>
+            <propertylist display="phone">
+              <property type="ParentControl" value="Home" />
+              <property type="TopMargin" value="0" />
+              <property type="Column" value="1" />
+              <property type="Binding" value="INSPECTIONS.InspectionTime" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="bgt3" type="Label">
+          <properties>
+            <propertylist display="phone">
+              <property type="Justify" value="Center" />
+              <property type="Title">
+                <value culture="en-US" title="Offline Data" />
+              </property>
+              <property type="TextColor" value="#FFF70E0E" />
+              <property type="VisibilityBinding" value="![online]" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pb2" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Refresh" />
+              </property>
+              <property type="EnabledBinding" value="[online]" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Invoke" data="GetInspections" extradata="" />
+              </actions>
+            </event>
+          </events>
+        </control>
+      </contents>
+      <bindings>
+        <binding name="INSPECTIONS" array="true" type="Inspection">
+          <state mode="HasItems" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="StoreName" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Notes" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Passed" type="Boolean">
+              <state mode="EqualsValue" comparevalue="TRUE" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="InspectionTime" type="Date/Time">
+              <state mode="NotNull" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+        <binding name="INSPECTION" type="Inspection">
+          <state mode="NotNull" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="StoreName" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Notes" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Passed" type="Boolean">
+              <state mode="EqualsValue" comparevalue="TRUE" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CachedInspection" type="Boolean">
+              <state mode="EqualsValue" comparevalue="TRUE" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="InspectionTime" type="Date/Time">
+              <state mode="NotNull" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts>
+        <function name="InitObjCache">
+          <description />
+          <parameters />
+          <variables />
+          <javascript>OfflineUtil.init([ "AddInspection" ]);</javascript>
+        </function>
+        <function name="LoadOfflineInspections">
+          <description />
+          <parameters />
+          <variables />
+          <javascript>var cachedInspections = OfflineUtil.getOpCachedObjects("AddInspection");
+if (cachedInspections === false){
+	return;
+}
+Td.Data.Binding.get("INSPECTIONS").setValue(cachedInspections);</javascript>
+        </function>
+      </javascripts>
+      <parameters />
+      <events>
+        <event name="CreateComplete">
+          <actions>
+            <action action="Javascript" data="InitObjCache" extradata="" />
+            <action action="If" data="[online]" extradata="">
+              <action action="Invoke" data="GetInspections" extradata="" />
+            </action>
+            <action action="Else" data="" extradata="">
+              <action action="Javascript" data="LoadOfflineInspections" extradata="" />
+            </action>
+          </actions>
+        </event>
+      </events>
+      <functions />
+      <operations>
+        <dataoperation name="GetInspections" connection="MongoDB" dataaction="Browse">
+          <databinding>
+            <binding name="INSPECTIONS" />
+          </databinding>
+          <idbinds>
+            <idbind name="">
+              <fieldbind>
+                <binding name="ID" />
+              </fieldbind>
+              <valuebind>
+                <binding name="" />
+              </valuebind>
+            </idbind>
+          </idbinds>
+          <filters />
+          <sortoptions />
+          <limitbinding>
+            <binding name="" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="" />
+          </skipbinding>
+        </dataoperation>
+        <dataoperation name="AddInspection" connection="MongoDB" dataaction="Add">
+          <databinding>
+            <binding name="INSPECTION" />
+          </databinding>
+          <idbinds>
+            <idbind name="">
+              <fieldbind>
+                <binding name="ID" />
+              </fieldbind>
+              <valuebind>
+                <binding name="" />
+              </valuebind>
+            </idbind>
+          </idbinds>
+          <filters />
+          <sortoptions />
+          <limitbinding>
+            <binding name="" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="" />
+          </skipbinding>
+        </dataoperation>
+      </operations>
+      <reports />
+    </page>
+    <page name="NewInspection">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="df1,cb1,df3,df2,pb1" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="New Inspection" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df1" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Store" />
+              </property>
+              <property type="Binding" value="INSPECTION.StoreName" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df2" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Notes" />
+              </property>
+              <property type="Multiline" value="Yes" />
+              <property type="Height" value="50" />
+              <property type="Binding" value="INSPECTION.Notes" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="cb1" type="CheckBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Pass" />
+              </property>
+              <property type="Binding" value="INSPECTION.Passed" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df3" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Inspect Time" />
+              </property>
+              <property type="Format" value="Datetime" />
+              <property type="Binding" value="INSPECTION.InspectionTime" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pb1" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Save" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="If" data="[online]" extradata="">
+                  <action action="Invoke" data="AddInspection" extradata="">
+                    <action action="Alert" data="" extradata="&quot;Inpection saved!&quot;">
+                      <action action="Navigate" data="Home" extradata="" />
+                    </action>
+                  </action>
+                </action>
+                <action action="Else" data="" extradata="">
+                  <action action="Alert" data="" extradata="&quot;Note: the device is currently offline and this inspection has been cached locally, you will need to sync inspections when back online for this to be saved&quot;">
+                    <action action="Set" data="INSPECTION.CachedInspection" extradata="TRUE" />
+                    <action action="Javascript" data="CacheInspection" extradata="INSPECTION" />
+                    <action action="Navigate" data="Home" extradata="" />
+                  </action>
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+      </contents>
+      <bindings>
+        <binding name="INSPECTION" type="Inspection">
+          <state mode="NotNull" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="StoreName" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Notes" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Passed" type="Boolean">
+              <state mode="EqualsValue" comparevalue="TRUE" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CachedInspection" type="Boolean">
+              <state mode="EqualsValue" comparevalue="TRUE" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="InspectionTime" type="Date/Time">
+              <state mode="NotNull" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts>
+        <function name="CacheInspection">
+          <description />
+          <parameters>
+            <variable name="inspectionObj" type="Unknown" />
+          </parameters>
+          <variables />
+          <javascript>OfflineUtil.pushOpCachedObject(inspectionObj, "AddInspection");</javascript>
+        </function>
+      </javascripts>
+      <parameters />
+      <events />
+      <functions />
+      <operations>
+        <dataoperation name="AddInspection" connection="MongoDB" dataaction="Add">
+          <databinding>
+            <binding name="INSPECTION" />
+          </databinding>
+          <idbinds>
+            <idbind name="">
+              <fieldbind>
+                <binding name="ID" />
+              </fieldbind>
+              <valuebind>
+                <binding name="" />
+              </valuebind>
+            </idbind>
+          </idbinds>
+          <filters />
+          <sortoptions />
+          <limitbinding>
+            <binding name="" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="" />
+          </skipbinding>
+        </dataoperation>
+      </operations>
+      <reports />
+    </page>
+  </webpages>
+  <dialogs />
+  <webconfig />
+</application>

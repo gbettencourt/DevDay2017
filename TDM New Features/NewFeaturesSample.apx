@@ -1,0 +1,627 @@
+<application xmlns="urn:Gupta.TD.CDK" version="2.0">
+  <settings>
+    <setting DefaultLanguage="en-US" />
+    <setting BuildTargetPath="&lt;default&gt;" />
+    <setting BuildURL="http://localhost" />
+    <setting DefaultDisplay="Phone" />
+    <setting FallbackDisplay="Phone" />
+    <setting FallbackLanguage="en-US" />
+    <setting PublishIISUrl="localhost" />
+    <setting Roles="Administrator,User" />
+    <setting DefaultPage="Home" />
+  </settings>
+  <libraries />
+  <displays>
+    <display name="Phone" width="320" height="480" id="phone" isphone="True" />
+    <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
+  </displays>
+  <cssincludes />
+  <jsincludes />
+  <javascripts>
+    <function name="ValidatePassword">
+      <description />
+      <parameters>
+        <variable name="pwd" type="Var" />
+      </parameters>
+      <variables />
+      <javascript>//validate password
+if (!pwd || pwd.length &lt; 8) {
+	return false;
+}
+return true;</javascript>
+    </function>
+  </javascripts>
+  <miscincludes />
+  <weblinks />
+  <reportfiles />
+  <symbolimports />
+  <variables />
+  <functions />
+  <operations />
+  <exceptions />
+  <classes>
+    <class name="Company" isdata="true" namemap="COMPANY">
+      <inherits />
+      <instance_variables>
+        <variable name="ADDRESS" type="String" />
+        <variable name="CITY" type="String" />
+        <variable name="COMPANY_ID" type="Number" identityfield="true" />
+        <variable name="COMPANY_NAME" type="String" />
+        <variable name="STATE" type="String" />
+        <variable name="ZIP" type="String" />
+      </instance_variables>
+      <functions />
+      <constructors />
+    </class>
+    <class name="User">
+      <inherits />
+      <instance_variables>
+        <variable name="FirstName" type="String" />
+        <variable name="LastName" type="String" />
+        <variable name="Email" type="String" />
+        <variable name="Password" type="String" />
+        <variable name="SaveState" type="Number" />
+        <variable name="ValidateOnly" type="Boolean" />
+      </instance_variables>
+      <functions />
+      <constructors />
+    </class>
+  </classes>
+  <dataconnections>
+    <dataconnection name="SqlBaseIsland" connectiontype="SQL">
+      <description />
+      <configuration>
+        <config name="DatabaseName">NewFeaturesSample</config>
+        <config name="Port">27017</config>
+        <config name="Host">localhost</config>
+        <config name="DbProvider">Sqlbase</config>
+        <config name="DbConnectionString">DataSource=localhost;InitialCatalog=ISLAND;Server=Server1;User=SYSADM;Password=SYSADM;poolsize=10;connectionlifetime=20;</config>
+      </configuration>
+    </dataconnection>
+    <dataconnection name="SqlServerDemo" connectiontype="SQL">
+      <description />
+      <configuration>
+        <config name="DatabaseName">NewFeaturesSample</config>
+        <config name="Port">27017</config>
+        <config name="Host">localhost</config>
+        <config name="DbProvider">SqlServer</config>
+        <config name="DbConnectionString">Server=Nacho\\SQLEXPRESS;Initial Catalog=testdb;User Id=qauser;Password=Newacct1;</config>
+      </configuration>
+    </dataconnection>
+  </dataconnections>
+  <webpages>
+    <page name="Home">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="pb1,pb2" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Samples" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pb1" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Limit/Skip Demo" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Navigate" data="LimitSkipTest" extradata="" />
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="pb2" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Scripting Demo" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Navigate" data="ScriptingTests" extradata="" />
+              </actions>
+            </event>
+          </events>
+        </control>
+      </contents>
+      <bindings />
+      <javascripts />
+      <parameters />
+      <events />
+      <functions />
+      <operations />
+      <reports />
+    </page>
+    <page name="LimitSkipTest">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="flp1,sldSkip,sldLimit,ltv1" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Companies" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="sldSkip" type="Slider">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Skip" />
+              </property>
+              <property type="LowerValBinding" value="LIMIT" />
+              <property type="Binding" value="SKIP" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Change">
+              <actions>
+                <action action="If" data="USE_SQLBASE" extradata="">
+                  <action action="Invoke" data="GetCompaniesSqlBase" extradata="" />
+                </action>
+                <action action="Else" data="" extradata="">
+                  <action action="Invoke" data="GetCompanies" extradata="" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="ltv1" type="ListView">
+          <properties>
+            <propertylist display="phone">
+              <property type="ListBinding" value="COMPANIES" />
+              <property type="Children" value="bgt1" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="bgt1" type="Label">
+          <properties>
+            <propertylist display="phone">
+              <property type="ParentControl" value="ltv1" />
+              <property type="TopMargin" value="0" />
+              <property type="Binding" value="COMPANIES.COMPANY_NAME" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="sldLimit" type="Slider">
+          <properties>
+            <propertylist display="phone">
+              <property type="Binding" value="LIMIT" />
+              <property type="Title">
+                <value culture="en-US" title="Limit" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Change">
+              <actions>
+                <action action="If" data="USE_SQLBASE" extradata="">
+                  <action action="Invoke" data="GetCompaniesSqlBase" extradata="" />
+                </action>
+                <action action="Else" data="" extradata="">
+                  <action action="Invoke" data="GetCompanies" extradata="" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="flp1" type="FlipSwitch">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Use SQLBase" />
+              </property>
+              <property type="Binding" value="USE_SQLBASE" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+      </contents>
+      <bindings>
+        <binding name="USE_SQLBASE" type="Boolean">
+          <state mode="EqualsValue" comparevalue="TRUE" />
+          <initialvalue mode="Null" />
+          <events />
+        </binding>
+        <binding name="SKIP" type="Number">
+          <state mode="DoesntEqualValue" comparevalue="0" />
+          <initialvalue mode="Null" />
+          <events />
+        </binding>
+        <binding name="LIMIT" type="Number">
+          <state mode="DoesntEqualValue" comparevalue="0" />
+          <initialvalue mode="Null" />
+          <events />
+        </binding>
+        <binding name="COMPANIES" array="true" type="Company">
+          <state mode="HasItems" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ADDRESS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CITY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_NAME" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="STATE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="ZIP" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts />
+      <parameters />
+      <events>
+        <event name="Create">
+          <actions>
+            <action action="Set" data="SKIP" extradata="0" />
+            <action action="Set" data="LIMIT" extradata="10" />
+          </actions>
+        </event>
+      </events>
+      <functions />
+      <operations>
+        <dataoperation name="GetCompanies" connection="SqlServerDemo" dataaction="Browse">
+          <databinding>
+            <binding name="COMPANIES" />
+          </databinding>
+          <idbinds />
+          <filters />
+          <sortoptions>
+            <sortoption name="" dir="Ascending">
+              <fieldbind>
+                <binding name="COMPANIES.COMPANY_NAME" />
+              </fieldbind>
+            </sortoption>
+          </sortoptions>
+          <limitbinding>
+            <binding name="LIMIT" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="SKIP" />
+          </skipbinding>
+        </dataoperation>
+        <dataoperation name="GetCompaniesSqlBase" connection="SqlBaseIsland" dataaction="Browse">
+          <databinding>
+            <binding name="COMPANIES" />
+          </databinding>
+          <idbinds />
+          <filters />
+          <sortoptions>
+            <sortoption name="" dir="Ascending">
+              <fieldbind>
+                <binding name="COMPANIES.COMPANY_NAME" />
+              </fieldbind>
+            </sortoption>
+          </sortoptions>
+          <limitbinding>
+            <binding name="LIMIT" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="SKIP" />
+          </skipbinding>
+        </dataoperation>
+      </operations>
+      <reports />
+    </page>
+    <page name="ScriptingTests">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="bgt1,pbCreateUser,df1,df2,dfEmail,dfPwd" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Scripting Tests" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df1" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="First" />
+              </property>
+              <property type="Binding" value="NEW_USER.FirstName" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="df2" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Last" />
+              </property>
+              <property type="Binding" value="NEW_USER.LastName" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="dfEmail" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Email" />
+              </property>
+              <property type="Binding" value="NEW_USER.Email" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="EndEdit">
+              <actions>
+                <action action="Set" data="NEW_USER.ValidateOnly" extradata="TRUE" />
+                <action action="Invoke" data="CreateUser" extradata="">
+                  <action action="RaiseEvent" data="CheckResponse" extradata="" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="dfPwd" type="TextBox">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Password" />
+              </property>
+              <property type="Binding" value="NEW_USER.Password" />
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Change">
+              <actions>
+                <action action="Javascript" data="ValidatePassword" extradata="NEW_USER.Password">
+                  <comment>! Password OK</comment>
+                  <action action="Set" data="CREATE_MSG" extradata="&quot;&quot;" />
+                </action>
+                <action action="Else" data="" extradata="">
+                  <action action="Set" data="NEW_USER.SaveState" extradata="2" />
+                  <action action="RaiseEvent" data="CheckResponse" extradata="" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="pbCreateUser" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Create User" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Set" data="NEW_USER.ValidateOnly" extradata="FALSE" />
+                <action action="Invoke" data="CreateUser" extradata="">
+                  <action action="RaiseEvent" data="CheckResponse" extradata="" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+        <control name="bgt1" type="Label">
+          <properties>
+            <propertylist display="phone">
+              <property type="FontEnh" value="Italic" />
+              <property type="TextColor" value="#FFE34629" />
+              <property type="Binding" value="CREATE_MSG" />
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+      </contents>
+      <bindings>
+        <binding name="CREATE_MSG" type="String">
+          <state mode="DoesntEqualValue" comparevalue="" />
+          <initialvalue mode="Null" />
+          <events />
+        </binding>
+        <binding name="NEW_USER" type="User">
+          <state mode="NotNull" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ValidateOnly" type="Boolean">
+              <state mode="NotNull" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="FirstName" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="LastName" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Email" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="Password" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="SaveState" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts />
+      <parameters />
+      <events>
+        <event name="User_CheckResponse">
+          <actions>
+            <action action="Set" data="CREATE_MSG" extradata="&quot;&quot;" />
+            <action action="If" data="NEW_USER.SaveState" extradata="== 1">
+              <comment>! User saved, navigate to login page</comment>
+              <action action="Alert" data="" extradata="&quot;User created!&quot;" />
+              <action action="Navigate" data="Login" extradata="" />
+            </action>
+            <action action="ElseIf" data="NEW_USER.SaveState" extradata="== 2">
+              <comment>! Password does not meet requirements</comment>
+              <action action="Set" data="CREATE_MSG" extradata="&quot;Password does not meet minimum security requirements&quot;" />
+            </action>
+            <action action="ElseIf" data="NEW_USER.SaveState" extradata="== 3">
+              <comment>! User with email already registered</comment>
+              <action action="Set" data="CREATE_MSG" extradata="&quot;A user with this email already exists&quot;" />
+            </action>
+            <action action="ElseIf" data="NEW_USER.SaveState" extradata="&gt; 50">
+              <comment>! Codes above 50 indicate system error</comment>
+              <action action="Set" data="CREATE_MSG" extradata="&quot;A system error occured, please contact administrator&quot;" />
+            </action>
+          </actions>
+        </event>
+      </events>
+      <functions />
+      <operations>
+        <operation name="CreateUser">
+          <description />
+          <parameters>
+            <variable name="pUser" type="User">
+              <binding name="NEW_USER" />
+            </variable>
+          </parameters>
+          <return type="User">
+            <binding name="NEW_USER" />
+          </return>
+          <variables />
+          <actions>
+            <code line="Set pUser.SaveState = 0" />
+            <code line="If pUser.Email = &quot;gbettenc@opentext.com&quot;">
+              <code line="Set pUser.SaveState = 3" />
+            </code>
+            <code line="Return pUser" />
+          </actions>
+        </operation>
+      </operations>
+      <reports />
+    </page>
+    <page name="Login">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone" />
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+      </contents>
+      <bindings />
+      <javascripts />
+      <parameters />
+      <events />
+      <functions />
+      <operations />
+      <reports />
+    </page>
+  </webpages>
+  <dialogs />
+  <webconfig />
+</application>

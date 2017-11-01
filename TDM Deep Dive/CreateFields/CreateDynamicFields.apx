@@ -1,0 +1,246 @@
+<application xmlns="urn:Gupta.TD.CDK" version="2.0">
+  <settings>
+    <setting DefaultLanguage="en-US" />
+    <setting BuildTargetPath="&lt;default&gt;" />
+    <setting BuildURL="http://localhost" />
+    <setting DefaultDisplay="Phone" />
+    <setting FallbackDisplay="Phone" />
+    <setting FallbackLanguage="en-US" />
+    <setting PublishIISUrl="localhost" />
+    <setting Roles="Administrator,User" />
+    <setting DefaultPage="GenFieldsTest" />
+  </settings>
+  <libraries />
+  <displays>
+    <display name="Phone" width="320" height="480" id="phone" isphone="True" />
+    <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
+  </displays>
+  <cssincludes />
+  <jsincludes />
+  <javascripts>
+    <function name="GenFieldsForUDVBind">
+      <description />
+      <parameters>
+        <variable name="bindName" type="Unknown" />
+      </parameters>
+      <variables />
+      <javascript>//get bind
+    var bind = Td.Data.Binding.get(bindName);
+
+    //iterate over bind members
+    for (var idx = 0; idx &lt; bind.opts.members.length; idx++){
+        var member = bind.opts.members[idx];
+        var fieldID = member.name;
+        
+        //create input DOM element in main content area
+        $("div[data-role='content']").append(
+            "&lt;div data-role='fieldcontain' id='" + fieldID + "_container'&gt;" + 
+            "&lt;label for='" + fieldID + "'&gt;" + fieldID + ":&lt;/label&gt;&lt;input id='" + fieldID + "' type='text'/&gt;");
+
+        //call JQM to tranform newly added DOM to a JQM control
+        $("div[data-role='content']").enhanceWithin();
+
+        //create TDM text control
+        new Td.Controls.TextBox(
+	        fieldID,
+	        {
+		        binding: { "source": bindName, "path": fieldID, "direction": "getset" }
+		    });
+    }</javascript>
+    </function>
+  </javascripts>
+  <miscincludes />
+  <weblinks />
+  <reportfiles />
+  <symbolimports />
+  <variables />
+  <functions />
+  <operations />
+  <exceptions />
+  <classes>
+    <class name="Company" isdata="true" namemap="COMPANY">
+      <inherits />
+      <instance_variables>
+        <variable name="ADDRESS" type="String" />
+        <variable name="CITY" type="String" />
+        <variable name="COMPANY_ID" type="Number" identityfield="true" />
+        <variable name="COMPANY_NAME" type="String" />
+        <variable name="CORPORATE_URL" type="String" />
+        <variable name="COUNTRY" type="String" />
+        <variable name="FAX" type="String" />
+        <variable name="LINE" type="Number" />
+        <variable name="PHONE" type="String" />
+        <variable name="STATE" type="String" />
+        <variable name="TERMS" type="String" />
+        <variable name="ZIP" type="String" />
+      </instance_variables>
+      <functions />
+      <constructors />
+    </class>
+  </classes>
+  <dataconnections>
+    <dataconnection name="IslandDB" connectiontype="SQL">
+      <description />
+      <configuration>
+        <config name="DatabaseName">CreateDynamicFields</config>
+        <config name="Port">27017</config>
+        <config name="Host">localhost</config>
+        <config name="DbProvider">Sqlbase</config>
+        <config name="DbConnectionString">DataSource=localhost;InitialCatalog=ISLAND;Server=Server1;User=SYSADM;Password=SYSADM;poolsize=10;connectionlifetime=20;</config>
+      </configuration>
+    </dataconnection>
+  </dataconnections>
+  <webpages>
+    <page name="GenFieldsTest">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone">
+          <property type="Children" value="pb1" />
+        </propertylist>
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="pb1" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Create Fields" />
+              </property>
+            </propertylist>
+          </properties>
+          <events>
+            <event name="Click">
+              <actions>
+                <action action="Set" data="COMP_ID" extradata="101" />
+                <action action="Invoke" data="GetCompany" extradata="">
+                  <action action="Javascript" data="GenFieldsForUDVBind" extradata="&quot;COMPANY&quot;" />
+                </action>
+              </actions>
+            </event>
+          </events>
+        </control>
+      </contents>
+      <bindings>
+        <binding name="COMP_ID" type="Number">
+          <state mode="DoesntEqualValue" comparevalue="0" />
+          <initialvalue mode="Null" />
+          <events />
+        </binding>
+        <binding name="COMPANY" type="Company">
+          <state mode="NotNull" />
+          <initialvalue mode="Null" />
+          <subbindings>
+            <binding name="ADDRESS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CITY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_ID" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COMPANY_NAME" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="CORPORATE_URL" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="COUNTRY" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="FAX" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="LINE" type="Number">
+              <state mode="DoesntEqualValue" comparevalue="0" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="PHONE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="STATE" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="TERMS" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+            <binding name="ZIP" type="String">
+              <state mode="DoesntEqualValue" comparevalue="" />
+              <initialvalue mode="Null" />
+              <events />
+            </binding>
+          </subbindings>
+          <events />
+        </binding>
+      </bindings>
+      <javascripts />
+      <parameters />
+      <events />
+      <functions />
+      <operations>
+        <dataoperation name="GetCompany" connection="IslandDB" dataaction="Read">
+          <databinding>
+            <binding name="COMPANY" />
+          </databinding>
+          <idbinds>
+            <idbind name="">
+              <fieldbind>
+                <binding name="COMPANY_ID" />
+              </fieldbind>
+              <valuebind>
+                <binding name="COMP_ID" />
+              </valuebind>
+            </idbind>
+          </idbinds>
+          <filters />
+          <sortoptions />
+          <limitbinding>
+            <binding name="" />
+          </limitbinding>
+          <skipbinding>
+            <binding name="" />
+          </skipbinding>
+        </dataoperation>
+      </operations>
+      <reports />
+    </page>
+  </webpages>
+  <dialogs />
+  <webconfig />
+</application>

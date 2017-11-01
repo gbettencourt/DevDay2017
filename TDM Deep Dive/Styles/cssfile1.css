@@ -1,0 +1,31 @@
+/*  Custom button icons */
+.ui-icon-pb_play:after {
+	background-image: url('../../play.png');
+	background-size: 18px 18px;
+}
+.ui-icon-pb_pause:after {
+	background-image: url('../../pause.png');
+	background-size: 18px 18px;
+}
+
+.media_player_btn {
+	height: 20px !important;
+}
+
+/*  Rotate image 90 degress right*/
+.r90 {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+/*  Rotate image 90 degress left*/
+.l90 {
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+}
+
+.img_rotate {
+  width: 300px;
+}
