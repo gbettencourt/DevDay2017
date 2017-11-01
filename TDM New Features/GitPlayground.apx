@@ -35,7 +35,9 @@
       </supporteddisplays>
       <description />
       <properties>
-        <propertylist display="phone" />
+        <propertylist display="phone">
+          <property type="Children" value="pb1" />
+        </propertylist>
       </properties>
       <menu />
       <contents>
@@ -48,6 +50,16 @@
         <control name="__header" type="Toolbar">
           <properties>
             <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="pb1" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="New Button" />
+              </property>
+            </propertylist>
           </properties>
           <events />
         </control>
