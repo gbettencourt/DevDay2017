@@ -1,0 +1,66 @@
+<application xmlns="urn:Gupta.TD.CDK" version="2.0">
+  <settings>
+    <setting DefaultLanguage="en-US" />
+    <setting BuildTargetPath="&lt;default&gt;" />
+    <setting BuildURL="http://localhost" />
+    <setting DefaultDisplay="Phone" />
+    <setting FallbackDisplay="Phone" />
+    <setting FallbackLanguage="en-US" />
+    <setting PublishIISUrl="localhost" />
+    <setting Roles="Administrator,User" />
+    <setting DefaultPage="page1" />
+  </settings>
+  <libraries />
+  <displays>
+    <display name="Phone" width="320" height="480" id="phone" isphone="True" />
+    <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
+  </displays>
+  <cssincludes />
+  <jsincludes />
+  <javascripts />
+  <miscincludes />
+  <weblinks />
+  <reportfiles />
+  <symbolimports />
+  <variables />
+  <functions />
+  <operations />
+  <exceptions />
+  <classes />
+  <dataconnections />
+  <webpages>
+    <page name="page1">
+      <supporteddisplays>
+        <display id="phone" />
+      </supporteddisplays>
+      <description />
+      <properties>
+        <propertylist display="phone" />
+      </properties>
+      <menu />
+      <contents>
+        <control name="__footer" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+        <control name="__header" type="Toolbar">
+          <properties>
+            <propertylist display="phone" />
+          </properties>
+          <events />
+        </control>
+      </contents>
+      <bindings />
+      <javascripts />
+      <parameters />
+      <events />
+      <functions />
+      <operations />
+      <reports />
+    </page>
+  </webpages>
+  <dialogs />
+  <webconfig />
+</application>
