@@ -57,7 +57,7 @@
           <properties>
             <propertylist display="phone">
               <property type="Title">
-                <value culture="en-US" title="New Button 2" />
+                <value culture="en-US" title="New Button 3" />
               </property>
             </propertylist>
           </properties>
