@@ -21,7 +21,7 @@
     <function name="ValidatePassword">
       <description />
       <parameters>
-        <variable name="pwd" type="Var" />
+        <variable name="pwd" type="Unknown" />
       </parameters>
       <variables />
       <javascript>//validate password
@@ -85,7 +85,7 @@ return true;</javascript>
         <config name="Port">27017</config>
         <config name="Host">localhost</config>
         <config name="DbProvider">SqlServer</config>
-        <config name="DbConnectionString">Server=Nacho\\SQLEXPRESS;Initial Catalog=testdb;User Id=qauser;Password=Newacct1;</config>
+        <config name="DbConnectionString">Server=ROS7GB-2H12\\SQLEXPRESS;Initial Catalog=testdb;User Id=qauser;Password=Newacct1;</config>
       </configuration>
     </dataconnection>
   </dataconnections>
