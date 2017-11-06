@@ -240,7 +240,7 @@ else {
             <propertylist display="phone">
               <property type="ParentControl" value="grp1" />
               <property type="TopMargin" value="0" />
-              <property type="FileName" value="Images\rewind.png" />
+              <property type="FileName" value="rewind.png" />
               <property type="ImageAlignment" value="NoText" />
               <property type="CssClass" value="media_player_btn" />
             </propertylist>
@@ -252,7 +252,7 @@ else {
             <propertylist display="phone">
               <property type="ParentControl" value="grp1" />
               <property type="TopMargin" value="0" />
-              <property type="FileName" value="Images\play.png" />
+              <property type="FileName" value="play.png" />
               <property type="ImageAlignment" value="NoText" />
               <property type="CssClass" value="media_player_btn" />
             </propertylist>
@@ -277,7 +277,7 @@ else {
             <propertylist display="phone">
               <property type="ParentControl" value="grp1" />
               <property type="TopMargin" value="0" />
-              <property type="FileName" value="Images\forward.png" />
+              <property type="FileName" value="forward.png" />
               <property type="ImageAlignment" value="NoText" />
               <property type="CssClass" value="media_player_btn" />
             </propertylist>
@@ -289,7 +289,7 @@ else {
             <propertylist display="phone">
               <property type="ParentControl" value="grp1" />
               <property type="TopMargin" value="0" />
-              <property type="FileName" value="Images\stop.png" />
+              <property type="FileName" value="stop.png" />
               <property type="ImageAlignment" value="NoText" />
               <property type="CssClass" value="media_player_btn" />
             </propertylist>
