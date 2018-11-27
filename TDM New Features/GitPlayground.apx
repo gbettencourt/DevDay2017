@@ -36,7 +36,7 @@
       <description />
       <properties>
         <propertylist display="phone">
-          <property type="Children" value="pb1,pb2" />
+          <property type="Children" value="pb1,pb2,pb3" />
         </propertylist>
       </properties>
       <menu />
@@ -57,7 +57,7 @@
           <properties>
             <propertylist display="phone">
               <property type="Title">
-                <value culture="en-US" title="New Button 2" />
+                <value culture="en-US" title="New Button 3" />
               </property>
             </propertylist>
           </properties>
@@ -68,6 +68,16 @@
             <propertylist display="phone">
               <property type="Title">
                 <value culture="en-US" title="Another Button" />
+              </property>
+            </propertylist>
+          </properties>
+          <events />
+        </control>
+        <control name="pb3" type="Button">
+          <properties>
+            <propertylist display="phone">
+              <property type="Title">
+                <value culture="en-US" title="Yet Another" />
               </property>
             </propertylist>
           </properties>
