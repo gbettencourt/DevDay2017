@@ -4,7 +4,7 @@
     <setting DefaultPage="SelectCompany" />
     <setting BuildTargetPath="&lt;default&gt;" />
     <setting EnableOffline="False" />
-    <setting CordovaEnabled="True" />
+    <setting CordovaEnabled="False" />
     <setting CordovaProjectDir="IslandNative" />
     <setting CordovaTargetDisplay="Phone" />
     <setting CordovaAppUrl="http://localhost/IslandDemo" />
@@ -16,11 +16,7 @@
     <display name="Phone" width="320" height="480" id="phone" isphone="True" />
     <display name="Tablet" width="768" height="1024" id="tablet" isphone="False" />
   </displays>
-  <cssincludes>
-    <cssfile name="islanddemo.css" path=".\CSS">
-      <description />
-    </cssfile>
-  </cssincludes>
+  <cssincludes />
   <jsincludes />
   <javascripts />
   <miscincludes />
